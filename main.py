@@ -1,31 +1,12 @@
-import requests
+from binance.client import Client
 
-def get_binance_futures_trading_pairs():
-    base_url = "https://api.binance.com/api/v3/exchangeInfo"
-    response = requests.get(base_url)
-    
-    if response.status_code == 200:
-        data = response.json()
-        trading_pairs = [symbol['symbol'] for symbol in data['symbols'] if symbol['contractType'] == 'PERPETUAL']
-        return trading_pairs
-    else:
-        print(f"Failed to fetch data. Status code: {response.status_code}")
-        return None
+api_key = "BVhb32XgQmX17IGs3vVH2Hw1fiH9W84pg8K5JtLuQnRKHPy7YlyPTG0qChkxTnrL"
+api_secret = "xVM8dF8qIhTRtfaTShbHON7oJffooUbP2wp3oPqYUbFLJ1ZCHLN9dEmN9niAYzVF"
 
-def save_to_txt_file(data, filename):
-    with open(filename, 'w') as file:
-        for item in data:
-            file.write(f"{item}\n")
-    print(f"Data saved to {filename}")
+client = Client(api_key, api_secret)
+exchange_info = client.get_exchange_info()
 
-if __name__ == "__main__":
-    trading_pairs = get_binance_futures_trading_pairs()
+futures_trading_pairs = [s['symbol'] for s in exchange_info['symbols'] if s['contractType'] == 'PERPETUAL']
 
-    if trading_pairs:
-        save_to_txt_file(trading_pairs, "binance_futures_trading_pairs.txt")
-
-if __name__ == "__main__":
-    trading_pairs = get_binance_futures_trading_pairs()
-
-    if trading_pairs:
-        save_to_txt_file(trading_pairs, "binance_futures_trading_pairs.txt")
+for trading_pair in futures_trading_pairs:
+    print(trading_pair)
