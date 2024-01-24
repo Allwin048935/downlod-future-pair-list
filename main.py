@@ -23,3 +23,9 @@ if __name__ == "__main__":
 
     if trading_pairs:
         save_to_txt_file(trading_pairs, "binance_futures_trading_pairs.txt")
+
+if __name__ == "__main__":
+    trading_pairs = get_binance_futures_trading_pairs()
+
+    if trading_pairs:
+        save_to_txt_file(trading_pairs, "binance_futures_trading_pairs.txt")
