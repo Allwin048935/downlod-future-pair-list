@@ -1,0 +1,11 @@
+import requests
+
+url = "https://api.bybit.com/v2/public/symbols"
+
+response = requests.get(url)
+data = response.json()
+
+futures_trading_pairs = [s['name'] for s in data['result'] if s['quote_currency'] == 'USDT']
+
+for trading_pair in futures_trading_pairs:
+    print(trading_pair)
