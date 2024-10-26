@@ -6,10 +6,10 @@ exchange = ccxt.bybit()
 # Fetch all markets
 markets = exchange.load_markets()
 
-# Filter for only USDT pairs in the futures market
-usdt_futures_pairs = [symbol for symbol, data in markets.items() if symbol.endswith('/USDT') and data['contractType'] == 'perpetual']
+# Filter pairs against USDT
+usdt_pairs = [symbol for symbol in markets if symbol.endswith('/USDT')]
 
-# Display the USDT futures pairs
-print("Bybit USDT futures pairs:")
-for pair in usdt_futures_pairs:
+# Display the pairs
+print("Bybit USDT pairs:")
+for pair in usdt_pairs:
     print(pair)
