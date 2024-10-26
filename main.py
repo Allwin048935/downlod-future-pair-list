@@ -1,4 +1,4 @@
-from binance.client import Client
+from bybit.client import Client
 
 api_key = "Hqod6Y5MDAkMmAJbRKOqUUDsYb9HG5aAkE3BMPZxHrm8JdZTgfIJr2RKSkRiOlDM"
 api_secret = "wVI5YTy9Y3dhiU1KoOSc0ysMVsAvaklSHDm40ZqkaHzKGgjlq9zlmi5CSF3n2wGw"
