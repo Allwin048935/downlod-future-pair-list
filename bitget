@@ -1,0 +1,20 @@
+import requests
+
+def get_usdt_pairs():
+    url = "https://api.bitget.com/api/spot/v1/public/products"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # Check for HTTP errors
+        data = response.json()
+
+        # Filter for USDT trading pairs
+        usdt_pairs = [item['symbol'] for item in data['data'] if 'USDT' in item['symbol']]
+        return usdt_pairs
+
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching data: {e}")
+        return []
+
+# Fetch and print USDT trading pairs
+usdt_pairs = get_usdt_pairs()
+print("USDT Trading Pairs on Bitget:", usdt_pairs)
