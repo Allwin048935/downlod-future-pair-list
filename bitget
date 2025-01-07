@@ -1,7 +1,7 @@
 import requests
 
 def get_usdt_pairs():
-    url = "https://api.bitget.com/api/contract/v1/public/products"
+    url = "https://api.bitget.com/api/v2/mix/market/tickers?productType=COIN-FUTURES"
     try:
         response = requests.get(url)
         response.raise_for_status()  # Check for HTTP errors
