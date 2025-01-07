@@ -5,11 +5,20 @@ def get_usdt_pairs():
     try:
         response = requests.get(url)
         response.raise_for_status()  # Check for HTTP errors
+        
+        # Print the entire response to debug
+        print("Full API Response:", response.json())
+
         data = response.json()
 
-        # Filter for USDT trading pairs
-        usdt_pairs = [item['symbol'] for item in data['data'] if 'USDT' in item['symbol']]
-        return usdt_pairs
+        # Ensure 'data' is present and is a list
+        if 'data' in data and isinstance(data['data'], list):
+            # Filter for USDT trading pairs
+            usdt_pairs = [item['symbol'] for item in data['data'] if 'USDT' in item['symbol']]
+            return usdt_pairs
+        else:
+            print("Unexpected data format.")
+            return []
 
     except requests.exceptions.RequestException as e:
         print(f"Error fetching data: {e}")
