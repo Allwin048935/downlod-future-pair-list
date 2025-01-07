@@ -1,4 +1,4 @@
-import requests
+import requests 
 
 def get_usdt_pairs():
     url = "https://api.bitget.com/api/v2/mix/market/tickers?productType=USDT-FUTURES"
@@ -6,9 +6,6 @@ def get_usdt_pairs():
         response = requests.get(url)
         response.raise_for_status()  # Check for HTTP errors
         
-        # Print the entire response to debug
-        print("Full API Response:", response.json())
-
         data = response.json()
 
         # Ensure 'data' is present and is a list
