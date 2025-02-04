@@ -1,0 +1,18 @@
+import requests
+
+# Fetch SELECTED_SYMBOLS dynamically from Binance Futures
+url = "https://fapi.binance.com/fapi/v1/exchangeInfo"
+try:
+    response = requests.get(url)
+    response.raise_for_status()  # Check if the request was successful
+    data = response.json()
+
+    SELECTED_SYMBOLS = [
+        s['symbol'] for s in data['symbols']
+        if s['quoteAsset'] == 'USDT' and s['status'] == 'TRADING'
+    ]
+except requests.exceptions.RequestException as e:
+    print(f"Error fetching data from Binance Futures: {e}")
+    SELECTED_SYMBOLS = []
+
+print(SELECTED_SYMBOLS)  # Optional: Print the fetched symbols
